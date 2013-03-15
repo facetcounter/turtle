@@ -3,11 +3,7 @@
         turtle.digUp()
       end
     end
-    function d()
-      while turtle.down() == false do
-        turtle.digDown()
-      end
-    end
+    function d() turtle.down() end
     function df() turtle.dig() end
     function f()
       while turtle.forward() == false do
@@ -19,7 +15,17 @@
     function du() turtle.digUp() end
     function dd() turtle.digDown() end
     function b() turtle.back() end
-
+    function forceB()
+      if turtle.back() == false then
+        r()
+        r()
+        while turtle.forward()==false do
+          turtle.dig()
+        end
+        r()
+        r()
+      end
+    end
     function pd()
       findSlot()
       turtle.placeDown()
@@ -36,7 +42,7 @@
       if turtle.getItemCount(slotIndex) > 0 then
         return true
       end
-      for slotIndex=1,8 do
+      for slotIndex=1,9 do
         if turtle.getItemCount(slotIndex) > 0 then
           return true
         end
@@ -51,42 +57,85 @@
     hasMore = true
     turtle.select(slotIndex)
     i=1
-    isCovered = true
-    direction = up
-    if args[i] == "-b" then
-      isCovered = false
-      i=i+1
-    end
-    if args[i] == "-d" then
-      direction=down
+    isCovered = false
+    if args[i] == "-c" then
+      isCovered = true
       i=i+1
     end
     if args[i] == nil then
-      distance = 1
+      size = 1
     else
-      distance = tonumber(args[i])
+      size = tonumber(args[i])
     end
-    i=1   
-     
-    while (i < distance) and hasMore do
-      pf()
-      forceB()
-      turtle.select(9)
-      pf()
-      turtle.select(slotIndex)
-      f()
-      if isCovered then
-        r()
+    i=1
+
+  function platform(x,y)
+    i=1
+    while (i < x) and hasMore do
+      j=1
+      while (j < y) and hasMore do
+        forceB()
         pf()
-        r()
-        pf()
-        r()
-        pf()
-        r()
+        j=j+1
       end
-      if direction == "up" then
-        u()
+      if (i % 2) > 0 then
+        r()
+        forceB()
+        r()
+        forceB()
       else
-        d()
+        l()
+        forceB()
+        l()
+        forceB()
       end
+      i=i+1
     end
+  end
+
+  function wall(x,y)
+    i=1
+    while (i < x) and hasMore do
+      j=1
+      while (j < y) and hasMore do
+        forceB()
+        pf()
+        j=j+1
+      end
+      r()
+      r()
+      u()
+      forceB()
+      i=i+1
+    end
+  end
+
+for 1=1,5 do
+  f()
+  r()
+  f()
+  r()
+end
+
+platform(10,10)
+
+u()
+for i=1,4 do
+  for j=1,11 do
+    forceB()
+    pf()
+  end
+end
+
+for i=1,10 do
+  d()
+end
+
+pd()
+pf()
+r()
+pf()
+r()
+pf()
+r()
+pf()
