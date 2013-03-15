@@ -110,11 +110,11 @@
     end
   end
 
-for 1=1,5 do
+for i=1,5 do
   f()
   r()
   f()
-  r()
+  l()
 end
 
 platform(10,10)
@@ -125,6 +125,7 @@ for i=1,4 do
     forceB()
     pf()
   end
+  r()
 end
 
 for i=1,10 do
