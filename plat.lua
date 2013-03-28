@@ -119,9 +119,11 @@ end
 
 platform(10,10)
 
+
 u()
+f()
 for i=1,4 do
-  for j=1,11 do
+  for j=1,10 do
     forceB()
     pf()
   end
@@ -132,11 +134,20 @@ for i=1,10 do
   d()
 end
 
-pd()
-pf()
-r()
-pf()
-r()
-pf()
-r()
-pf()
+for i=1,4 do
+  pd()
+  pf()
+  r()
+  pf()
+  r()
+  pf()
+  r()
+  pf()
+
+  u()
+  for j=1,10 do
+    f()
+  end
+
+  d()
+end
